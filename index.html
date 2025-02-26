@@ -6,11 +6,18 @@
     <title>Blåhaj Clicker</title>
     <style>
         body {
-            text-align: center;
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            height: 100vh;
+            padding: 0 20px;
+        }
+        #game-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
         }
         #blahaj {
             width: 300px;
@@ -18,17 +25,17 @@
         }
         #score {
             font-size: 24px;
-            margin-top: 20px;
+            text-align: center;
         }
         .shop {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
         }
         .shop img {
             width: 50px;
             height: 50px;
-            margin-right: 10px;
+            margin-bottom: 10px;
         }
         .shop button {
             padding: 10px;
@@ -38,13 +45,16 @@
     </style>
 </head>
 <body>
-    <h1>Blåhaj Clicker</h1>
-    <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
-    <p id="score">Score: 0</p>
-    
-    <div class="shop">
-        <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
-        <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
+    <div id="game-container">
+        <div>
+            <h1>Blåhaj Clicker</h1>
+            <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
+            <p id="score">Score: 0</p>
+        </div>
+        <div class="shop">
+            <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
+            <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
+        </div>
     </div>
     
     <script>
@@ -53,6 +63,7 @@
         const scoreDisplay = document.getElementById("score");
         const powerUpBtn = document.getElementById("powerUpBtn");
         let powerUpMultiplier = 1;
+        let djungelskogCount = 0;
         
         scoreDisplay.textContent = "Score: " + score;
         
@@ -65,11 +76,19 @@
         powerUpBtn.addEventListener("click", () => {
             if (score >= 10) {
                 score -= 10;
-                powerUpMultiplier++;
+                djungelskogCount++;
                 scoreDisplay.textContent = "Score: " + score;
                 localStorage.setItem("score", score);
             }
         });
+        
+        setInterval(() => {
+            if (djungelskogCount > 0) {
+                score += djungelskogCount;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        }, 10000);
     </script>
 </body>
 </html>
