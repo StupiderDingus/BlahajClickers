@@ -8,6 +8,9 @@
         body {
             text-align: center;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         #blahaj {
             width: 300px;
@@ -17,6 +20,21 @@
             font-size: 24px;
             margin-top: 20px;
         }
+        .shop {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .shop img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .shop button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -24,17 +42,33 @@
     <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
     <p id="score">Score: 0</p>
     
+    <div class="shop">
+        <img src="https://via.placeholder.com/50" alt="Power-up">
+        <button id="powerUpBtn">Buy Power-up (Cost: 10)</button>
+    </div>
+    
     <script>
         let score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
         const blahaj = document.getElementById("blahaj");
         const scoreDisplay = document.getElementById("score");
+        const powerUpBtn = document.getElementById("powerUpBtn");
+        let powerUpMultiplier = 1;
         
         scoreDisplay.textContent = "Score: " + score;
         
         blahaj.addEventListener("click", () => {
-            score++;
+            score += powerUpMultiplier;
             scoreDisplay.textContent = "Score: " + score;
             localStorage.setItem("score", score);
+        });
+        
+        powerUpBtn.addEventListener("click", () => {
+            if (score >= 10) {
+                score -= 10;
+                powerUpMultiplier++;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
         });
     </script>
 </body>
