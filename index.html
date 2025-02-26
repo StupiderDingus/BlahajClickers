@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Clicker Game</title>
+    <title>Blåhaj Clicker</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        #clicker { font-size: 24px; padding: 10px; margin: 20px; cursor: pointer; }
-        #shop button { margin: 5px; }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #87CEEB;
+        }
+        #blahaj {
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        #blahaj:active {
+            transform: scale(0.95);
+        }
+        #score {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Custom Clicker Game</h1>
-    <p>Score: <span id="score">0</span></p>
-    <button id="clicker">Click Me!</button>
-    <div id="shop">
-        <button id="upgrade">Upgrade Click (+1)</button> <span>Cost: <span id="upgradeCost">10</span></span>
-    </div>
-
+    <h1>Blåhaj Clicker</h1>
+    <p id="score">Score: 0</p>
+    <img id="blahaj" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Bl%C3%A5haj_2021.jpg" alt="Blåhaj">
+    
     <script>
         let score = 0;
-        let clickValue = 1;
-        let upgradeCost = 10;
+        const blahaj = document.getElementById("blahaj");
+        const scoreDisplay = document.getElementById("score");
 
-        document.getElementById("clicker").addEventListener("click", () => {
-            score += clickValue;
-            document.getElementById("score").innerText = score;
-        });
-
-        document.getElementById("upgrade").addEventListener("click", () => {
-            if (score >= upgradeCost) {
-                score -= upgradeCost;
-                clickValue += 1;
-                upgradeCost = Math.floor(upgradeCost * 1.5);
-                document.getElementById("score").innerText = score;
-                document.getElementById("upgradeCost").innerText = upgradeCost;
-            }
+        blahaj.addEventListener("click", () => {
+            score++;
+            scoreDisplay.textContent = "Score: " + score;
         });
     </script>
 </body>
