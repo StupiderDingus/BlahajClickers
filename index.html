@@ -13,9 +13,9 @@
             height: 100vh;
             padding: 0 20px;
             background-image: url('https://ih1.redbubble.net/image.4759846887.6120/raf,360x360,075,t,fafafa:ca443f4786.u4.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: auto;
+            background-repeat: repeat;
+            background-position: top left;
         }
         h1 {
             text-align: center;
@@ -25,7 +25,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slight background to make text readable */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         #blahaj-container {
             display: flex;
@@ -33,11 +38,11 @@
             align-items: center;
         }
         #blahaj {
-            width: 300px;
+            width: 200px; /* Smaller size for the image */
             cursor: pointer;
         }
         #score {
-            font-size: 24px;
+            font-size: 20px; /* Slightly smaller score font */
             font-weight: bold;
             text-align: center;
             margin-bottom: 10px;
@@ -48,13 +53,13 @@
             align-items: center;
         }
         .shop img {
-            width: 50px;
-            height: 50px;
+            width: 40px; /* Smaller size for the shop icon */
+            height: 40px;
             margin-bottom: 10px;
         }
         .shop button {
-            padding: 10px;
-            font-size: 16px;
+            padding: 8px;
+            font-size: 14px; /* Smaller font for buttons */
             cursor: pointer;
         }
     </style>
