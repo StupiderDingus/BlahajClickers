@@ -28,7 +28,7 @@
             width: 80%;
             max-width: 800px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Slight background to make text readable */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -38,11 +38,11 @@
             align-items: center;
         }
         #blahaj {
-            width: 200px; /* Smaller size for the image */
+            width: 200px;
             cursor: pointer;
         }
         #score {
-            font-size: 20px; /* Slightly smaller score font */
+            font-size: 20px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 10px;
@@ -53,13 +53,13 @@
             align-items: center;
         }
         .shop img {
-            width: 40px; /* Smaller size for the shop icon */
+            width: 40px;
             height: 40px;
             margin-bottom: 10px;
         }
         .shop button {
             padding: 8px;
-            font-size: 14px; /* Smaller font for buttons */
+            font-size: 14px;
             cursor: pointer;
             margin-bottom: 10px;
         }
@@ -73,12 +73,17 @@
             <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
         </div>
         <div class="shop">
+            <!-- DJUNGELSKOG -->
             <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
             <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
 
-            <!-- AFTONSPARV Power-up -->
-            <img src="https://img1.picmix.com/output/stamp/normal/1/5/5/8/2628551_c3d4f.png">
+            <!-- AFTONSPARV -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Afton_Logo.svg/1024px-Afton_Logo.svg.png" alt="AFTONSPARV">
             <button id="aftonPowerUpBtn">Buy AFTONSPARV (Cost: 50)</button>
+
+            <!-- SMÅKRYP -->
+            <img src="https://www.imghippo.com/i/iEar5700mp.png">
+            <button id="smakrypPowerUpBtn">Buy AFTONSPARV (cat) (Cost: 200)</button>
         </div>
     </div>
     
@@ -88,10 +93,13 @@
         const scoreDisplay = document.getElementById("score");
         const powerUpBtn = document.getElementById("powerUpBtn");
         const aftonPowerUpBtn = document.getElementById("aftonPowerUpBtn");
+        const smakrypPowerUpBtn = document.getElementById("smakrypPowerUpBtn");
+        
         let powerUpMultiplier = 1;
         let djungelskogCount = 0;
         let aftonPowerUpActive = false;
-        
+        let smakrypPowerUpActive = false;
+
         scoreDisplay.textContent = "Score: " + score;
         
         blahaj.addEventListener("click", () => {
@@ -117,8 +125,17 @@
                 localStorage.setItem("score", score);
             }
         });
-        
-        // Every 5 seconds, if AFTONSPARV power-up is active, add 5 to the score
+
+        smakrypPowerUpBtn.addEventListener("click", () => {
+            if (score >= 200) {
+                score -= 200;
+                smakrypPowerUpActive = true;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        });
+
+        // AFTONSPARV: +5 every 5 seconds
         setInterval(() => {
             if (aftonPowerUpActive) {
                 score += 5;
@@ -127,7 +144,7 @@
             }
         }, 5000);
 
-        // Every 10 seconds, add score based on DJUNGELSKOG count
+        // DJUNGELSKOG: +1 per DJUNGELSKOG every 10 seconds
         setInterval(() => {
             if (djungelskogCount > 0) {
                 score += djungelskogCount;
@@ -135,6 +152,15 @@
                 localStorage.setItem("score", score);
             }
         }, 10000);
+
+        // SMÅKRYP: +20 every 3 seconds
+        setInterval(() => {
+            if (smakrypPowerUpActive) {
+                score += 20;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        }, 3000);
     </script>
 </body>
 </html>
