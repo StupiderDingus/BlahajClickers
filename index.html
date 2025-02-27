@@ -61,6 +61,7 @@
             padding: 8px;
             font-size: 14px; /* Smaller font for buttons */
             cursor: pointer;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -74,6 +75,10 @@
         <div class="shop">
             <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
             <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
+
+            <!-- AFTONSPARV Power-up -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Afton_Logo.svg/1024px-Afton_Logo.svg.png" alt="AFTONSPARV" style="width: 40px; height: 40px;">
+            <button id="aftonPowerUpBtn">Buy AFTONSPARV (Cost: 50)</button>
         </div>
     </div>
     
@@ -82,8 +87,10 @@
         const blahaj = document.getElementById("blahaj");
         const scoreDisplay = document.getElementById("score");
         const powerUpBtn = document.getElementById("powerUpBtn");
+        const aftonPowerUpBtn = document.getElementById("aftonPowerUpBtn");
         let powerUpMultiplier = 1;
         let djungelskogCount = 0;
+        let aftonPowerUpActive = false;
         
         scoreDisplay.textContent = "Score: " + score;
         
@@ -101,7 +108,26 @@
                 localStorage.setItem("score", score);
             }
         });
+
+        aftonPowerUpBtn.addEventListener("click", () => {
+            if (score >= 50) {
+                score -= 50;
+                aftonPowerUpActive = true;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        });
         
+        // Every 5 seconds, if AFTONSPARV power-up is active, add 5 to the score
+        setInterval(() => {
+            if (aftonPowerUpActive) {
+                score += 5;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        }, 5000);
+
+        // Every 10 seconds, add score based on DJUNGELSKOG count
         setInterval(() => {
             if (djungelskogCount > 0) {
                 score += djungelskogCount;
