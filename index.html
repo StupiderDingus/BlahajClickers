@@ -12,10 +12,9 @@
             align-items: center;
             height: 100vh;
             padding: 0 20px;
-            background-image: url('https://ih1.redbubble.net/image.4759846887.6120/raf,360x360,075,t,fafafa:ca443f4786.u4.jpg');
-            background-size: auto;
+            background: url("https://ih1.redbubble.net/image.4759846887.6120/raf,360x360,075,t,fafafa:ca443f4786.u4.jpg");
             background-repeat: repeat;
-            background-position: top left;
+            background-size: 100px;
         }
         h1 {
             text-align: center;
@@ -25,12 +24,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 80%;
-            max-width: 800px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
         #blahaj-container {
             display: flex;
@@ -38,11 +32,11 @@
             align-items: center;
         }
         #blahaj {
-            width: 200px;
+            width: 300px;
             cursor: pointer;
         }
         #score {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 10px;
@@ -53,15 +47,14 @@
             align-items: center;
         }
         .shop img {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             margin-bottom: 10px;
         }
         .shop button {
-            padding: 8px;
-            font-size: 14px;
+            padding: 10px;
+            font-size: 16px;
             cursor: pointer;
-            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -73,17 +66,22 @@
             <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
         </div>
         <div class="shop">
-            <!-- DJUNGELSKOG -->
-            <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
-            <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
-
-            <!-- AFTONSPARV -->
-            <img src="https://img1.picmix.com/output/stamp/normal/1/5/5/8/2628551_c3d4f.png">
-            <button id="aftonPowerUpBtn">Buy AFTONSPARV (Cost: 50)</button>
-
-            <!-- SMÅKRYP -->
-            <img src="https://i.imghippo.com/files/iEar5700mp.png" alt="" border="0">
-            <button id="smakrypPowerUpBtn">Buy SMÅKRYP (Cost: 200)</button>
+            <div>
+                <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
+                <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
+            </div>
+            <div>
+                <img src="https://www.ikea.com/us/en/images/products/aftonsp... plush__0885622_pe659300_s5.jpg" alt="AFTONSPARV">
+                <button id="aftonPowerUpBtn">Buy AFTONSPARV (Cost: 50)</button>
+            </div>
+            <div>
+                <img src="https://www.ikea.com/us/en/images/products/smakryp-plush__0885623_pe659301_s5.jpg" alt="SMÅKRYP">
+                <button id="smakrypPowerUpBtn">Buy SMÅKRYP (Cost: 200)</button>
+            </div>
+            <div>
+                <img src="https://i.imghippo.com/files/gPT5485Wo.png" alt="ORM">
+                <button id="ormPowerUpBtn">Buy ORM (Cost: 500)</button>
+            </div>
         </div>
     </div>
     
@@ -94,20 +92,22 @@
         const powerUpBtn = document.getElementById("powerUpBtn");
         const aftonPowerUpBtn = document.getElementById("aftonPowerUpBtn");
         const smakrypPowerUpBtn = document.getElementById("smakrypPowerUpBtn");
-        
+        const ormPowerUpBtn = document.getElementById("ormPowerUpBtn");
+
         let powerUpMultiplier = 1;
         let djungelskogCount = 0;
         let aftonPowerUpActive = false;
         let smakrypPowerUpActive = false;
+        let ormPowerUpActive = false;
 
         scoreDisplay.textContent = "Score: " + score;
-        
+
         blahaj.addEventListener("click", () => {
             score += powerUpMultiplier;
             scoreDisplay.textContent = "Score: " + score;
             localStorage.setItem("score", score);
         });
-        
+
         powerUpBtn.addEventListener("click", () => {
             if (score >= 10) {
                 score -= 10;
@@ -130,6 +130,17 @@
             if (score >= 200) {
                 score -= 200;
                 smakrypPowerUpActive = true;
+                scoreDisplay.textContent = "Score: " + score;
+                localStorage.setItem("score", score);
+            }
+        });
+
+        ormPowerUpBtn.addEventListener("click", () => {
+            if (score >= 500 && !ormPowerUpActive) {
+                score -= 500;
+                powerUpMultiplier += 15; // Increases click power by +15
+                ormPowerUpActive = true;
+                ormPowerUpBtn.disabled = true; // Can only be bought once
                 scoreDisplay.textContent = "Score: " + score;
                 localStorage.setItem("score", score);
             }
