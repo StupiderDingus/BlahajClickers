@@ -11,20 +11,27 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
-            padding: 0 20px;
+            padding: 0;
+            margin: 0;
             background: url("https://ih1.redbubble.net/image.4759846887.6120/raf,360x360,075,t,fafafa:ca443f4786.u4.jpg");
             background-repeat: repeat;
-            background-size: 100px;
+            background-size: 60px; /* Smaller & properly tiled */
         }
         h1 {
-            text-align: center;
-            margin-top: 10px;
+            font-size: 36px;
+            margin-top: 20px;
         }
         #game-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: 80%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
         #blahaj-container {
             display: flex;
@@ -32,29 +39,45 @@
             align-items: center;
         }
         #blahaj {
-            width: 300px;
+            width: 350px;
             cursor: pointer;
         }
         #score {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            text-align: center;
             margin-bottom: 10px;
         }
         .shop {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 15px;
+        }
+        .shop-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         }
         .shop img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
+            width: 70px;
+            height: 70px;
         }
         .shop button {
-            padding: 10px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 18px;
             cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            transition: 0.3s;
+        }
+        .shop button:hover {
+            background: #388E3C;
         }
     </style>
 </head>
@@ -66,19 +89,19 @@
             <img id="blahaj" src="https://cdna.artstation.com/p/assets/images/images/056/833/046/original/lara-hughes-blahaj-spin-compressed.gif" alt="Blåhaj">
         </div>
         <div class="shop">
-            <div>
+            <div class="shop-item">
                 <img src="https://img1.picmix.com/output/stamp/normal/8/3/7/2/2302738_13642.png" alt="DJUNGELSKOG">
                 <button id="powerUpBtn">Buy DJUNGELSKOG (Cost: 10)</button>
             </div>
-            <div>
+            <div class="shop-item">
                 <img src="https://www.ikea.com/us/en/images/products/aftonsp... plush__0885622_pe659300_s5.jpg" alt="AFTONSPARV">
                 <button id="aftonPowerUpBtn">Buy AFTONSPARV (Cost: 50)</button>
             </div>
-            <div>
+            <div class="shop-item">
                 <img src="https://www.ikea.com/us/en/images/products/smakryp-plush__0885623_pe659301_s5.jpg" alt="SMÅKRYP">
                 <button id="smakrypPowerUpBtn">Buy SMÅKRYP (Cost: 200)</button>
             </div>
-            <div>
+            <div class="shop-item">
                 <img src="https://i.imghippo.com/files/gPT5485Wo.png" alt="ORM">
                 <button id="ormPowerUpBtn">Buy ORM (Cost: 500)</button>
             </div>
